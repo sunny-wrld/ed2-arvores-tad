@@ -1,10 +1,10 @@
 public class tad {
-    class Ponteiro {
+    class Nodo {
         int chave;
-        Ponteiro esq, dir;
+        Nodo esq, dir;
         int altura;
 
-        Ponteiro(int c) {
+        Nodo(int c) {
             chave = c;
             altura = 1;
         }
@@ -12,20 +12,20 @@ public class tad {
 
     class AVL {
 
-        Ponteiro raiz;
+        Nodo raiz;
 
-        int altura(Ponteiro p) {
+        int altura(Nodo p) {
             if (p == null) return 0;
             return p.altura;
         }
 
-        int fb(Ponteiro p) {
+        int fb(Nodo p) {
             return altura(p.esq) - altura(p.dir);
         }
 
-        Ponteiro rotDir(Ponteiro y) {
-            Ponteiro x = y.esq;
-            Ponteiro t2 = x.dir;
+        Nodo rotDir(Nodo y) {
+            Nodo x = y.esq;
+            Nodo t2 = x.dir;
             x.dir = y;
             y.esq = t2;
             y.altura = 1 + Math.max(altura(y.esq), altura(y.dir));
@@ -33,9 +33,9 @@ public class tad {
             return x;
         }
 
-        Ponteiro rotEsq(Ponteiro x) {
-            Ponteiro y = x.dir;
-            Ponteiro t2 = y.esq;
+        Nodo rotEsq(Nodo x) {
+            Nodo y = x.dir;
+            Nodo t2 = y.esq;
             y.esq = x;
             x.dir = t2;
             x.altura = 1 + Math.max(altura(x.esq), altura(x.dir));
@@ -43,8 +43,8 @@ public class tad {
             return y;
         }
 
-        Ponteiro inserirRec(Ponteiro p, int chave) {
-            if (p == null) return new Ponteiro(chave);
+        Nodo inserirRec(Nodo p, int chave) {
+            if (p == null) return new Nodo(chave);
 
             if (chave < p.chave)
                 p.esq = inserirRec(p.esq, chave);
@@ -74,7 +74,7 @@ public class tad {
             raiz = inserirRec(raiz, chave);
         }
 
-        Ponteiro buscar(Ponteiro p, int chave) {
+        Nodo buscar(Nodo p, int chave) {
             if (p == null) return null;
             if (chave == p.chave) return p;
             if (chave < p.chave) return buscar(p.esq, chave);
@@ -85,12 +85,12 @@ public class tad {
             return buscar(raiz, chave) != null;
         }
 
-        Ponteiro menor(Ponteiro p) {
+        Nodo menor(Nodo p) {
             while (p.esq != null) p = p.esq;
             return p;
         }
 
-        Ponteiro removerRec(Ponteiro p, int chave) {
+        Nodo removerRec(Nodo p, int chave) {
             if (p == null) return null;
 
             if (chave < p.chave)
@@ -99,10 +99,10 @@ public class tad {
                 p.dir = removerRec(p.dir, chave);
             else {
                 if (p.esq == null || p.dir == null) {
-                    Ponteiro t = (p.esq != null) ? p.esq : p.dir;
+                    Nodo t = (p.esq != null) ? p.esq : p.dir;
                     p = t;
                 } else {
-                    Ponteiro suc = menor(p.dir);
+                    Nodo suc = menor(p.dir);
                     p.chave = suc.chave;
                     p.dir = removerRec(p.dir, suc.chave);
                 }
@@ -131,7 +131,7 @@ public class tad {
             raiz = removerRec(raiz, chave);
         }
 
-        void emOrdem(Ponteiro p) {
+        void emOrdem(Nodo p) {
             if (p == null) return;
             emOrdem(p.esq);
             System.out.print(p.chave + " ");
