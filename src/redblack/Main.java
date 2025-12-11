@@ -2,7 +2,7 @@ package redblack;
 
 public class Main {
     public static void main(String[] args) {
-        tad.RedBlack tree = new tad.RedBlack();
+        tad.RubroNegra tree = new tad.RubroNegra();
 
         int[] values = {10, 20, 30, 15, 25, 5, 1, 50, 40};
         System.out.println("Inserindo:");
