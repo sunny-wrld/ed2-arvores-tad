@@ -2,7 +2,8 @@ package avl;
 
 import java.util.Scanner;
 
-public class TADAgenda {
+public class
+TADAgenda {
     private final ArvoreAVL agenda;
     private final Scanner scanner;
 
